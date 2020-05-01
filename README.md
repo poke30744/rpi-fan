@@ -1,7 +1,7 @@
 # rpi-fan
 ## Usage
 ```
-fan.py -h
+./fan.py -h
 usage: fan.py [-h] --gpio GPIO --on ON --off OFF [--interval INTERVAL]
 
 Python script to control fan on Raspberry Pi
