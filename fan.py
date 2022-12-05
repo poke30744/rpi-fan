@@ -1,4 +1,6 @@
 #!/usr/bin/env python
+import sys
+sys.path.append('/storage/.kodi/addons/virtual.rpi-tools/lib')
 import argparse
 import time
 from gpiozero import OutputDevice, CPUTemperature
@@ -13,10 +15,12 @@ if __name__ == "__main__":
 
     fan = OutputDevice(args.gpio)
     cpu = CPUTemperature()
+    previousTemperature = cpu.temperature
 
     while True:
         if cpu.temperature > args.on:
             fan.on()
-        elif cpu.temperature < args.off:
+        elif cpu.temperature < args.off and cpu.temperature >= previousTemperature:
             fan.off()
+        previousTemperature = cpu.temperature
         time.sleep(args.interval)
